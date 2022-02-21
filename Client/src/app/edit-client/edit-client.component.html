@@ -1,0 +1,141 @@
+<h4 class="heading">Edit Client</h4>
+<div class="row">
+  <form
+    class="col s12"
+    [formGroup]="editClientForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <div class="row">
+      <div class="input-field col s6">
+        <input
+          id="firstName"
+          class="validate"
+          type="text"
+          formControlName="firstName"
+          required
+        />
+        <label for="firstName" class="active">First Name</label>
+        <span class="helper-text" data-error="Field is required."></span>
+      </div>
+      <div class="input-field col s6">
+        <input
+          id="lastName"
+          class="validate"
+          type="text"
+          formControlName="lastName"
+          required
+        />
+        <label for="lastName" class="active">Last Name</label>
+        <span class="helper-text" data-error="Field is required."></span>
+      </div>
+    </div>
+    <div class="row" formGroupName="contactInfo">
+      <div class="input-field col s4">
+        <input
+          id="homeNumber"
+          class="validate"
+          type="text"
+          formControlName="home"
+        />
+        <label for="homeNumber" class="active">Home Number</label>
+        <span
+          *ngIf="
+            contactInfo?.invalid && (contactInfo?.dirty || contactInfo?.touched)
+          "
+        >
+          <span
+            class="helper-text red-text"
+            *ngIf="contactInfo?.errors?.['required']"
+            >At least 1 number is required</span
+          >
+        </span>
+      </div>
+      <div class="input-field col s4">
+        <input
+          id="workNumber"
+          class="validate"
+          type="text"
+          formControlName="work"
+        />
+        <label for="workNumber" class="active">Work Number</label>
+        <span
+          *ngIf="
+            contactInfo?.invalid && (contactInfo?.dirty || contactInfo?.touched)
+          "
+        >
+          <span
+            class="helper-text red-text"
+            *ngIf="contactInfo?.errors?.['required']"
+            >At least 1 number is required</span
+          >
+        </span>
+      </div>
+      <div class="input-field col s4">
+        <input
+          id="mobileNumber"
+          class="validate"
+          type="text"
+          formControlName="mobile"
+        />
+        <label for="mobileNumber" class="active">Mobile Number</label>
+        <span
+          *ngIf="
+            contactInfo?.invalid && (contactInfo?.dirty || contactInfo?.touched)
+          "
+        >
+          <span
+            class="helper-text red-text"
+            *ngIf="contactInfo?.errors?.['required']"
+            >At least 1 number is required</span
+          >
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input
+          id="address"
+          class="validate"
+          type="text"
+          formControlName="address"
+          required
+        />
+        <label for="address" class="active">Address</label>
+        <span class="helper-text" data-error="Field is required."></span>
+      </div>
+      <div class="input-field col s6">
+        <input
+          id="email"
+          class="validate"
+          type="email"
+          formControlName="email"
+          required
+        />
+        <label for="email" class="active">Email</label>
+        <span *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <span class="helper-text red-text" *ngIf="email?.errors?.['required']"
+            >Field is required</span
+          >
+          <span class="helper-text red-text" *ngIf="email?.errors?.['email']"
+            >Enter a valid email</span
+          >
+        </span>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field col s6">
+        <button
+          type="submit"
+          class="btn right"
+          [disabled]="editClientForm?.invalid"
+        >
+          Submit
+        </button>
+      </div>
+      <div class="input-field col s6">
+        <button class="btn grey left" routerLink="/clients">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
