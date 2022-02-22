@@ -1,4 +1,5 @@
-﻿using API.Models;
+﻿using System.Text.Json;
+using API.Models;
 using Bogus;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,11 +11,11 @@ public class Seed
     {
         if (await context.Clients.AnyAsync()) return;
         
-        var testContactInfo = new Faker<ContactInfo>()
+        var testContactInfo = new Faker<ContactInfo>(locale: "el")
             .RuleFor(c => c.PhoneNumber, f => f.Phone.PhoneNumber())
             .RuleFor(c => c.ContactType, f => f.PickRandom<ContactType>());
         
-        var testClients = new Faker<Client>()
+        var testClients = new Faker<Client>(locale: "en")
             .RuleFor(c => c.FirstName, f => f.Name.FirstName())
             .RuleFor(c => c.LastName, f => f.Name.LastName())
             .RuleFor(c => c.ContactInfo, f => testContactInfo.Generate(2).ToList())

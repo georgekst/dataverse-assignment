@@ -12,11 +12,25 @@
           id="firstName"
           class="validate"
           type="text"
+          pattern="^[A-Za-z]*$"
           formControlName="firstName"
           required
         />
         <label for="firstName" class="active">First Name</label>
-        <span class="helper-text" data-error="Field is required."></span>
+        <span
+          *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
+        >
+          <span
+            class="helper-text"
+            data-error="Field is required."
+            *ngIf="firstName?.errors?.['required']"
+          ></span>
+          <span
+            class="helper-text red-text"
+            *ngIf="firstName?.errors?.['pattern']"
+            >Not a valid first name</span
+          >
+        </span>
       </div>
       <div class="input-field col s6">
         <input
@@ -27,7 +41,20 @@
           required
         />
         <label for="lastName" class="active">Last Name</label>
-        <span class="helper-text" data-error="Field is required."></span>
+        <span
+          *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)"
+        >
+          <span
+            class="helper-text"
+            data-error="Field is required."
+            *ngIf="lastName?.errors?.['required']"
+          ></span>
+          <span
+            class="helper-text red-text"
+            *ngIf="lastName?.errors?.['pattern']"
+            >Not a valid last name</span
+          >
+        </span>
       </div>
     </div>
     <div class="row" formGroupName="contactInfo">
@@ -36,6 +63,7 @@
           id="homeNumber"
           class="validate"
           type="text"
+          pattern="^[0-9]*$"
           formControlName="home"
         />
         <label for="homeNumber" class="active">Home Number</label>
@@ -49,6 +77,9 @@
             *ngIf="contactInfo?.errors?.['required']"
             >At least 1 number is required</span
           >
+          <span class="helper-text red-text" *ngIf="home?.errors?.['pattern']"
+            >Not a valid phone number</span
+          >
         </span>
       </div>
       <div class="input-field col s4">
@@ -56,6 +87,7 @@
           id="workNumber"
           class="validate"
           type="text"
+          pattern="^[0-9]*$"
           formControlName="work"
         />
         <label for="workNumber" class="active">Work Number</label>
@@ -69,6 +101,9 @@
             *ngIf="contactInfo?.errors?.['required']"
             >At least 1 number is required</span
           >
+          <span class="helper-text red-text" *ngIf="work?.errors?.['pattern']"
+            >Not a valid phone number</span
+          >
         </span>
       </div>
       <div class="input-field col s4">
@@ -76,6 +111,7 @@
           id="mobileNumber"
           class="validate"
           type="text"
+          pattern="^[0-9]*$"
           formControlName="mobile"
         />
         <label for="mobileNumber" class="active">Mobile Number</label>
@@ -88,6 +124,9 @@
             class="helper-text red-text"
             *ngIf="contactInfo?.errors?.['required']"
             >At least 1 number is required</span
+          >
+          <span class="helper-text red-text" *ngIf="mobile?.errors?.['pattern']"
+            >Not a valid phone number</span
           >
         </span>
       </div>

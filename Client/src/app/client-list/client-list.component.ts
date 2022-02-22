@@ -9,6 +9,7 @@ import { ClientsService } from '../clients.service';
 })
 export class ClientListComponent implements OnInit {
   clients: Client[] = [];
+  loading = true;
 
   constructor(private clientsService: ClientsService) {}
 
@@ -20,6 +21,7 @@ export class ClientListComponent implements OnInit {
     this.clientsService.getAll().subscribe({
       next: (response) => {
         this.clients = response.data;
+        this.loading = false;
       },
       error: (e) => console.error(e),
     });

@@ -10,12 +10,12 @@ import { ClientsService } from '../clients.service';
 })
 export class CreateClientComponent {
   createClientForm = this.formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]*$')]],
+    lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z]*$')]],
     contactInfo: this.formBuilder.group({
-      home: [''],
-      work: [''],
-      mobile: [''],
+      home: ['', Validators.pattern('^[0-9]*$')],
+      work: ['', Validators.pattern('^[0-9]*$')],
+      mobile: ['', Validators.pattern('^[0-9]*$')],
     }),
     address: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -27,8 +27,28 @@ export class CreateClientComponent {
     private clientsService: ClientsService
   ) {}
 
+  get firstName() {
+    return this.createClientForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.createClientForm.get('lastName');
+  }
+
   get contactInfo() {
     return this.createClientForm.get('contactInfo');
+  }
+
+  get home() {
+    return this.createClientForm.controls['contactInfo'].get('home');
+  }
+
+  get work() {
+    return this.createClientForm.controls['contactInfo'].get('work');
+  }
+
+  get mobile() {
+    return this.createClientForm.controls['contactInfo'].get('mobile');
   }
 
   get email() {

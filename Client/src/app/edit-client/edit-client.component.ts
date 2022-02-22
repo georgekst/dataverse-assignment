@@ -14,12 +14,12 @@ export class EditClientComponent implements OnInit {
   clientId!: number;
   client!: Client;
   editClientForm = this.formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]*$')]],
+    lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z]*$')]],
     contactInfo: this.formBuilder.group({
-      home: [''],
-      work: [''],
-      mobile: [''],
+      home: ['', Validators.pattern('^[0-9]*$')],
+      work: ['', Validators.pattern('^[0-9]*$')],
+      mobile: ['', Validators.pattern('^[0-9]*$')],
     }),
     address: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -67,8 +67,28 @@ export class EditClientComponent implements OnInit {
     });
   }
 
+  get firstName() {
+    return this.editClientForm?.get('firstName');
+  }
+
+  get lastName() {
+    return this.editClientForm?.get('lastName');
+  }
+
   get contactInfo() {
     return this.editClientForm?.get('contactInfo');
+  }
+
+  get home() {
+    return this.editClientForm?.controls['contactInfo'].get('home');
+  }
+
+  get work() {
+    return this.editClientForm?.controls['contactInfo'].get('work');
+  }
+
+  get mobile() {
+    return this.editClientForm?.controls['contactInfo'].get('mobile');
   }
 
   get email() {

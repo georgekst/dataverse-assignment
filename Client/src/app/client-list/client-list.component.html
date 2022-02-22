@@ -1,43 +1,50 @@
-<h4 class="heading">Client List</h4>
-<table class="highlight">
-  <thead>
-    <tr>
-      <th>No.</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Contact Info</th>
-      <th>Address</th>
-      <th>Email</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div *ngIf="loading">
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <h4 class="heading">Client List</h4>
+  <table class="highlight">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Contact Info</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor="let client of clients" class="client-row">
-      <td>{{ client.id }}</td>
-      <td>{{ client.firstName }}</td>
-      <td>{{ client.lastName }}</td>
-      <td>
-        <div *ngFor="let contact of client.contactInfo">
-          <span
-            ><strong>{{ contact.contactType }}</strong
-            >: {{ contact.phoneNumber }}</span
-          >
-        </div>
-      </td>
-      <td>{{ client.address }}</td>
-      <td>{{ client.email }}</td>
-      <td>
-        <button class="btn teal" [routerLink]="[client.id, 'edit']">
-          Edit
-        </button>
-      </td>
-      <td>
-        <button class="btn red" (click)="deleteClient(client.id)">
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr *ngFor="let client of clients" class="client-row">
+        <td>{{ client.id }}</td>
+        <td>{{ client.firstName }}</td>
+        <td>{{ client.lastName }}</td>
+        <td>
+          <div *ngFor="let contact of client.contactInfo">
+            <span
+              ><strong>{{ contact.contactType }}</strong
+              >: {{ contact.phoneNumber }}</span
+            >
+          </div>
+        </td>
+        <td>{{ client.address }}</td>
+        <td>{{ client.email }}</td>
+        <td>
+          <button class="btn teal" [routerLink]="[client.id, 'edit']">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button class="btn red" (click)="deleteClient(client.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
